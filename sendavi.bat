@@ -23,8 +23,8 @@ for %%F in ("%FOLDER%\%FILE_EXT%") do (
     echo %TIMESTAMP% INFO: Processing file %%~nxF >> "%LOG_FILE%"
     
     :: Run the process command
-    echo %TIMESTAMP% INFO: Running cmd %PROCESS_CMD% %%F %RESTOF_CMD% >> "%LOG_FILE%"
-    "%PROCESS_CMD%" ""%%F"" "%RESTOF_CMD%"
+    echo %TIMESTAMP% INFO: Running cmd %PROCESS_CMD% %%~F %RESTOF_CMD% >> "%LOG_FILE%"
+    "%PROCESS_CMD%" "%%~F" "%RESTOF_CMD%"
     
     :: Check if process was successful
     if !ERRORLEVEL! EQU 0 (
