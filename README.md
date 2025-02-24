@@ -7,8 +7,11 @@ This project will automate the processing and release of video files, resulting 
 Video files are generated from end of manual design process in Karaoke Builder Studio  on Windows (only).
 ### Task Scheduler: Batch
 Raw AVI is output manually to a watched folder in Windows. A batch script finds new files and copies them to the processing host (MacOS).
+* Script: **sendavi.bat**
+* Scheduler Entry: **Copy AVI Files**, daily at 02:22:22
+
 ### Cron Entry: Python
-A **python** script does the following: 
+A python script called **process-avi.py** does the following: 
 * validates new **AVI** files
 * transcodes them to **MP4**, validates the result
 * copies the successful result to a shared Google Drive folder
@@ -18,7 +21,7 @@ A **python** script does the following:
 ## Dependencies
 * python 3
 * SSH authentication with unattended key exchange
-* windows batch file on 
+* windows batch file on KB Studio "appliance" (Lenovo)
 * ffmpeg
 * MacOS Cron
 * Windows Task Scheduler
