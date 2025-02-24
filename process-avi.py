@@ -48,7 +48,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
         new_files = [
             f for f in directory_path.glob(f'*{source_ext}')
             if f.is_file() 
-            and f.stat().st_mtime > flag_time 
+            #and f.stat().st_mtime > flag_time 
             and f != flag_path
         ]
 
