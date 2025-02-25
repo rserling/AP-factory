@@ -3,6 +3,7 @@ import os
 import subprocess
 import datetime
 from pathlib import Path
+import shutil
 import sys
 import logging
 
@@ -65,12 +66,6 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                 cmd_parts = [
                     #"ffmpeg -n -i " + str(src) + " -pix_fmt yuv420p " + str(tgt)
                     "/usr/local/bin/ffmpeg -n -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
-                    #"ffmpeg -n -i ",
-                    #command,
-                    #str(src),
-                    #parameter
-                    #"-pix_fmt yuv420p",
-                    #str(tgt)
                 ]
                 
                 # Run the command
@@ -93,8 +88,17 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                     # Delete source file
                     source_path.unlink()
                     logger.info(f"Successfully processed and deleted: {source_path.name}")
+
+                    # Copy file to Drive
+                    try:
+                      shutil.copy(source_path, "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions")
+                    except EnvironmentError:
+                       logger.error(f"Unable to copy file {source_path.name} to GDrive")
+                    else:
+                       logger.info(f"Copied to GDrive: {source_path.name}")
                 else:
                     logger.error(f"Command failed for {source_path.name}: {result.stderr}")
+
 
             except Exception as e:
                 logger.error(f"Error processing {source_path.name}: {str(e)}")
@@ -111,7 +115,7 @@ def main():
     #directory = sys.argv[1]
     #directory = thepath.replace(" ", "\\ ")
     #thepath = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions" 
-    directory = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions" 
+    directory = "/Users/elyons/kbuild"
     #flag_file = sys.argv[2]
     flag_file = (f"{directory}/processed.txt")
 
