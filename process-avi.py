@@ -10,7 +10,8 @@ import logging
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='/var/tmp/process-avi.log', filemode='w', level=logging.DEBUG
 )
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
         source_ext (str): Source file extension to look for
         target_ext (str): Target file extension for output
     """
+    end_dir = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions"
     try:
         # Ensure extensions start with dot
         source_ext = f".{source_ext.lstrip('.')}"
@@ -91,7 +93,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
 
                     # Copy file to Drive
                     try:
-                      shutil.copy(source_path, "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions")
+                      shutil.copy(source_path, end_dir) 
                     except EnvironmentError:
                        logger.error(f"Unable to copy file {source_path.name} to GDrive")
                     else:
