@@ -115,7 +115,7 @@ def main():
     #directory = sys.argv[1]
     #directory = thepath.replace(" ", "\\ ")
     #thepath = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions" 
-    directory = "/Users/elyons/kbuild"
+    directory = "/Users/elyons/Music/kbuild"
     #flag_file = sys.argv[2]
     flag_file = (f"{directory}/processed.txt")
 
