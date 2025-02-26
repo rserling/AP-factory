@@ -11,7 +11,7 @@ import logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='/var/tmp/process-avi.log', filemode='w', level=logging.DEBUG
+    filename='/var/tmp/process-avi.log', filemode='w'
 )
 logger = logging.getLogger(__name__)
 
