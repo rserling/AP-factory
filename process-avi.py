@@ -66,14 +66,12 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                 target_path = source_path.with_suffix(target_ext)
                 # Construct command with parameter and target filename
                 cmd_parts = [
-                    #"ffmpeg -n -i " + str(src) + " -pix_fmt yuv420p " + str(tgt)
-                    "/usr/local/bin/ffmpeg -n -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
+                    "/usr/local/bin/ffmpeg -y -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
                 ]
                 
                 # Run the command
                 logger.info(f"Processing: {source_path}")
                 result = subprocess.run(
-                    #['ffmpeg -n -i ', str(src), '-pix_fmt yuv420p', str(tgt)],
                     cmd_parts,
                     capture_output=True,
                     shell=True,
@@ -109,16 +107,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
         logger.error(f"Error in process_new_files: {str(e)}")
 
 def main():
-    #if len(sys.argv) != 7:
-    #    print("Usage: script.py <directory> <flag_file> <command> <parameter> <source_ext> <target_ext>")
-    #    print("Example: script.py /input flag.txt ffmpeg -q:a 0 mp3 ogg")
-    #    sys.exit(1)
-
-    #directory = sys.argv[1]
-    #directory = thepath.replace(" ", "\\ ")
-    #thepath = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions" 
     directory = "/Users/elyons/Music/kbuild"
-    #flag_file = sys.argv[2]
     flag_file = (f"{directory}/processed.txt")
 
     command = "ffmpeg -n -i"
