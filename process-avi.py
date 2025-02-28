@@ -11,7 +11,7 @@ import logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='/var/tmp/process-avi.log', filemode='w'
+    filename='/var/tmp/process-avi.log', filemode='a'
 )
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,6 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
         source_ext (str): Source file extension to look for
         target_ext (str): Target file extension for output
     """
-    end_dir = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions"
     try:
         # Ensure extensions start with dot
         source_ext = f".{source_ext.lstrip('.')}"
@@ -59,6 +58,9 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
             logger.info(f"No new files with extension {source_ext} to process at {directory_path}")
             return
 
+        end_dir = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions"
+        final_path = Path(end_dir)
+
         # Process each new file
         for source_path in new_files:
             try:
@@ -83,19 +85,19 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                     # Append to flag file with just the filename and timestamp
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     with open(flag_file, 'a') as f:
-                        f.write(f"{timestamp} - {source_path.name}\n")
+                        f.write(f"{timestamp} - {target_path.name}\n")
                     
                     # Delete source file
                     source_path.unlink()
-                    logger.info(f"Successfully processed and deleted: {source_path.name}")
+                    logger.info(f"Processed and deleted: {source_path.name}")
 
                     # Copy file to Drive
                     try:
-                      shutil.copy(source_path, end_dir) 
+                      shutil.copy(target_path, final_path) 
                     except EnvironmentError:
-                       logger.error(f"Unable to copy file {source_path.name} to GDrive")
+                       logger.error(f"Unable to copy file {target_path.name} to {final_path}")
                     else:
-                       logger.info(f"Copied to GDrive: {source_path.name}")
+                       logger.info(f"Copied to GDrive: {target_path.name}")
                 else:
                     logger.error(f"Command failed for {source_path.name}: {result.stderr}")
 
