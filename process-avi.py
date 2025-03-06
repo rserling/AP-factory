@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import subprocess
 import datetime
@@ -11,7 +10,7 @@ import logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='/var/tmp/process-avi.log', filemode='a'
+    filename='G:/Users/LENOVO/logz/process-avi.log', filemode='a'
 )
 logger = logging.getLogger(__name__)
 
@@ -58,7 +57,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
             logger.info(f"No new files with extension {source_ext} to process at {directory_path}")
             return
 
-        end_dir = "/Users/elyons/Google Drive/My Drive/kbuild/Ambiguous Productions"
+        end_dir = "G:/My Drive/kbuild/Ambiguous Productions"
         final_path = Path(end_dir)
 
         # Process each new file
@@ -68,7 +67,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                 target_path = source_path.with_suffix(target_ext)
                 # Construct command with parameter and target filename
                 cmd_parts = [
-                    "/usr/local/bin/ffmpeg -y -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
+                    "ffmpeg -y -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
                 ]
                 
                 # Run the command
@@ -109,7 +108,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
         logger.error(f"Error in process_new_files: {str(e)}")
 
 def main():
-    directory = "/Users/elyons/Music/kbuild"
+    directory = "C:/Users/LENOVO/kbuild"
     flag_file = (f"{directory}/processed.txt")
 
     command = "ffmpeg -n -i"
