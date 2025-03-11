@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='G:/Users/LENOVO/logz/process-avi.log', filemode='a'
+    filename='C:/Users/LENOVO/logz/process-avi.log', filemode='a'
 )
 logger = logging.getLogger(__name__)
 
@@ -67,15 +67,17 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                 target_path = source_path.with_suffix(target_ext)
                 # Construct command with parameter and target filename
                 cmd_parts = [
-                    "ffmpeg -y -i \"" + str(source_path) + "\" -pix_fmt yuv420p \"" + str(target_path) + "\""
+                    'ffmpeg', '-y', '-i', source_path.name, '-pix_fmt', 'yuv420p', target_path.name
                 ]
                 
                 # Run the command
                 logger.info(f"Processing: {source_path}")
+                logger.info(f"Tryna run: {cmd_parts}")
+                os.chdir(directory_path)
                 result = subprocess.run(
                     cmd_parts,
                     capture_output=True,
-                    shell=True,
+                    shell=False,
                     text=True
                 )
 
@@ -92,7 +94,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
 
                     # Copy file to Drive
                     try:
-                      shutil.copy(target_path, final_path) 
+                      shutil.copy(target_path.name, final_path)
                     except EnvironmentError:
                        logger.error(f"Unable to copy file {target_path.name} to {final_path}")
                     else:
@@ -102,14 +104,14 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
 
 
             except Exception as e:
-                logger.error(f"Error processing {source_path.name}: {str(e)}")
+                logger.error(f"Error processing {source_path}: {str(e)}")
 
     except Exception as e:
         logger.error(f"Error in process_new_files: {str(e)}")
 
 def main():
-    directory = "C:/Users/LENOVO/kbuild"
-    flag_file = (f"{directory}/processed.txt")
+    directory = "C:/Users/LENOVO/kbuilds"
+    flag_file = "C:/Users/LENOVO/kbuilds/processed.txt"
 
     command = "ffmpeg -n -i"
     parameter = "-pix_fmt yuv420p"
