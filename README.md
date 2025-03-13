@@ -20,6 +20,7 @@ A python script finds new **avi** files, transcodes them to **mp4** and copies t
 
 ## Dependencies
 * python 3
-* python script on KB Studio "appliance" (Lenovo)
 * ffmpeg
+* python script on KB Studio "appliance" (Lenovo)
+* dedicated mount to Google Drive (via GD Desktop App)
 * Windows Task Scheduler
