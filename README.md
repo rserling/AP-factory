@@ -1,8 +1,8 @@
 # Ambiguous Productions
-This project will automate the processing and release of video files, resulting in a media production pipeline. It is ambitious, adds questionable value and probably a spectacular _Frittering and Wasting of Hours_. But good excersize? 
+This project automates the processing and release of video files, resulting in a sort of media production pipeline. It is ambitious, adds questionable value and probably a spectacular _Frittering and Wasting of Hours_. But good excersize? 
 
 ## Background
-Due to compute resource limitations, transcoding and validation should happen directly on the client machine, before the result is published to cloud resources (Google Drive) 
+Due to compute resource limitations, transcoding and validation should happen directly on the client (design/production) machine, before the result is published to cloud resources (Google Drive) 
 
 ## Components
 
