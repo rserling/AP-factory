@@ -74,6 +74,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
                 logger.info(f"Processing: {source_path}")
                 logger.info(f"Tryna run: {cmd_parts}")
                 os.chdir(directory_path)
+                print(f"Excuse me while I process the file {source_path.name}")
                 result = subprocess.run(
                     cmd_parts,
                     capture_output=True,
@@ -108,6 +109,7 @@ def process_new_files(directory, flag_file, command, parameter, source_ext, targ
 
     except Exception as e:
         logger.error(f"Error in process_new_files: {str(e)}")
+    print(f"Generated and published file {target_path.name}")
 
 def main():
     directory = "C:/Users/LENOVO/kbuilds"
